@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Working Hours",
+  "description": "This extension will analyze working hours (corp.m.ht)",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "all_frames": true,
+    "js":      ["content.js"]
+  }],
+
+  "permissions": [
+    "activeTab"
+  ]
+}
