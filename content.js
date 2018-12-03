@@ -1,9 +1,8 @@
 console.log('content here');
 
-chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === 'get-info') {
-    console.log("something happening from the extension");
-    fetchData('/').then(function (html) {
+    fetchData(request.data).then(function (html) {
       sendMessageToPopup(html);
     });
   }
@@ -18,11 +17,12 @@ function fetchData(url) {
     headers: myHeaders
   }).then(function (response) {
     return response.text();
-  }).catch(function(err) {
-    console.log(err)
+  }).catch(function (err) {
+    console.error(err)
   });
 }
 
 function sendMessageToPopup(data) {
+  console.log(data);
   chrome.runtime.sendMessage({type: 'send-html', data: data});
 }
